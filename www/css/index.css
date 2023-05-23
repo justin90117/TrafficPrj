@@ -1,0 +1,431 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color: #E4E4E4;
+    background-image: linear-gradient(to bottom, #A7A7A7 0%, #E4E4E4 51%);
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size: 12px;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    text-transform: uppercase;
+    width: 100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background: url(../img/traffic_icon_logo.png) no-repeat center top;
+    /* 170px x 200px */
+    position: absolute;
+    /* position in the center of the screen */
+    left: 50%;
+    top: 50%;
+    height: 50px;
+    /* text area height */
+    width: 225px;
+    /* text area width */
+    text-align: center;
+    padding: 180px 0px 0px 0px;
+    /* image height is 200px (bottom 20px are overlapped with text) */
+    margin: -115px 0px 0px -112px;
+    /* offset vertical: half of image height and text area height */
+    /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position: left center;
+        padding: 75px 0px 75px 170px;
+        /* padding-top + padding-bottom + text area = image height */
+        margin: -90px 0px 0px -198px;
+        /* offset vertical: half of image height */
+        /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0px;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
+}
+
+.event {
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin: 0px 30px;
+    padding: 2px 0px;
+}
+
+.event.listening {
+    background-color: #333333;
+    display: block;
+}
+
+.event.received {
+    background-color: #4B946A;
+    display: none;
+}
+
+#deviceready.ready .event.listening {
+    display: none;
+}
+
+#deviceready.ready .event.received {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1.0;
+    }
+}
+
+.blink {
+    animation: fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-image: linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
+    }
+}
+
+@font-face {
+    font-family: BrunoAceSC;
+    src: url(/www/css/fonts/Bruno_Ace_SC/BrunoAceSC-Regular.ttf) format("opentype");
+}
+
+body {
+    font-family: 'BrunoAceSC', serif;
+    font-size: 30px;
+}
+
+#backToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    z-index: 2;
+    width: 100px;
+}
+
+#backToTopBtn:hover {
+    background-color: #555;
+}
+
+#backToTopBtn.show {
+    opacity: 1;
+}
+
+#backToTopBtn2 {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    z-index: 2;
+    width: 100px;
+}
+
+#backToTopBtn2:hover {
+    background-color: #555;
+}
+
+#backToTopBtn2.show {
+    opacity: 1;
+}
+
+#backToTopBtn3 {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    z-index: 2;
+    width: 100px;
+}
+
+#backToTopBtn3:hover {
+    background-color: #555;
+}
+
+#backToTopBtn3.show {
+    opacity: 1;
+}
+
+@property --direc {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#train_home_img {
+    --direc: 0deg;
+    background-image: linear-gradient(var(--direc),
+            rgb(223, 86, 1),
+            rgb(55, 55, 149),
+            rgb(138, 216, 138));
+    justify-items: center;
+    align-items: center;
+    display: flex;
+    border-width: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, red, yellow) 1;
+    margin: 30px;
+    font-size: 50px;
+    cursor: pointer;
+    animation: img_anim 3s linear infinite;
+    transition: all 3s;
+}
+
+#bus_home_img {
+    --direc: 0deg;
+    background-image: linear-gradient(var(--direc),
+            rgb(227, 64, 64),
+            rgb(255, 0, 166),
+            rgb(233, 230, 9));
+    justify-items: center;
+    align-items: center;
+    display: flex;
+    border-width: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, rgb(21, 0, 255), rgb(0, 255, 4)) 1;
+    margin: 30px;
+    font-size: 50px;
+    cursor: pointer;
+    animation: img_anim 3s linear infinite;
+    transition: all 3s;
+}
+
+#mrt_home_img {
+    --direc: 0deg;
+    background-image: linear-gradient(var(--direc),
+            rgb(33, 156, 126),
+            rgb(106, 27, 170),
+            rgb(233, 162, 9));
+    justify-items: center;
+    align-items: center;
+    display: flex;
+    border-width: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, rgb(21, 0, 255), rgb(0, 255, 4)) 1;
+    margin: 30px;
+    font-size: 50px;
+    cursor: pointer;
+    animation: img_anim 3s linear infinite;
+    transition: all 3s;
+}
+
+@keyframes img_anim {
+    from {
+        --direc: 0deg;
+    }
+
+    to {
+        --direc: 360deg;
+    }
+}
+
+.first_page_div {
+    justify-content: center;
+    display: flex;
+    margin-top: 30px;
+    font-size: 23px;
+    text-align: center;
+    font-weight: 600;
+    background-image: linear-gradient(to right, #ff0000 10%, #0900ff); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+}
+
+.mrt_img {
+    background-image: url("/www/img/mrt1.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    justify-items: center;
+    width: 100%;
+    position: inherit;
+    height: 500px;
+}
+.mrt_img2 {
+    background-image: url("/www/img/mrt2.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    justify-items: center;
+    width: 100%;
+    position: inherit;
+    height: 500px;
+}
+.mrt_img3 {
+    background-image: url("/www/img/mrt3.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    justify-items: center;
+    width: 100%;
+    position: inherit;
+    height: 500px;
+}
+.mrt_img4 {
+    background-image: url("/www/img/mrt4.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    justify-items: center;
+    width: 100%;
+    position: inherit;
+    height: 500px;
+}
+
+.clock_main {
+    width: 240px;
+    height: 45px;
+    padding: 3px;
+    margin-left: -94px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #02fefe;
+    border-radius: 50%;
+    box-shadow:
+        -5px -5px 10px rgba(255, 255, 255, 0.5),
+        5px 5px 10px rgba(70, 70, 70, 0.12);
+}
+
+.clock1 {
+    font-size: 15px;
+    color: #1B1B1B;
+    letter-spacing: 5px;
+}
+.clock2 {
+    font-size: 15px;
+    color: #1B1B1B;
+    letter-spacing: 5px;
+}
+.clock3 {
+    font-size: 15px;
+    color: #1B1B1B;
+    letter-spacing: 5px;
+}
+
+.back {
+    padding: 5px !important;
+}
+
+li h2 {
+    display: flex !important;
+    cursor: pointer;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 20px;
+}
+
+li div {
+    display: none;
+    letter-spacing: 1.2px;
+    padding: 3px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+#sure_btn_2{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit_btn{
+    width: 100% !important;
+}
+
+#userDate{
+    text-align: center;
+}
+
+#userTime{
+    text-align: center;    
+}
+
+label{
+    font-size: 20px !important;
+}
+
+select{
+}
+
+#busline{
+    padding: 12px;
+}
+
+#busSubmitForm{
+    padding: 10px;
+    margin-top: 25px;
+}
